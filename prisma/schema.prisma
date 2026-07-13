@@ -1,0 +1,42 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+// Get a free hosted Postgres database in seconds: `npx create-db`
+
+generator client {
+  provider = "prisma-client-js"
+  //output   = "../src/generated/prisma"
+}
+
+datasource db {
+  provider = "postgresql"
+}
+
+model student {
+  id Int @id @default(autoincrement())
+  studentCode String @unique
+  firstName String
+  lastName String
+  email String @unique
+  password String
+  phone String?
+  birthDate DateTime?
+  active Boolean @default(true)
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@map("students") // NOMBRE DE LA TABLA EN LA BASE DE DATOS
+}
+
+
+  model Subject {
+    id Int @id @default(autoincrement())
+    code String @unique
+    name String
+    credits Int @default(3)
+    active Boolean @default(true)
+    createdAt DateTime @default(now())
+    updatedAt DateTime @updatedAt
+
+    @@map("subjects")
+}
